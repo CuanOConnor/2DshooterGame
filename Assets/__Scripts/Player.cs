@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class Player : MonoBehaviour
     public Transform bulletPosition;
     bool called = false;
 
+    public float health;
+    public Slider sl;
+
     Vector2 movePosition;
 
     Rigidbody2D rb;
@@ -18,12 +22,15 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();     
+        rb = GetComponent<Rigidbody2D>();
+        sl.maxValue = health;
+        sl.value = health;   
     }
 
     // Update is called once per frame
     void Update()
     {
+        sl.value = health;
         movePosition = new Vector2(Input.GetAxis("Horizontal")*speed*Time.deltaTime, Input.GetAxis("Vertical")*speed*Time.deltaTime);
         movePosition = (rb.position + movePosition);
         movePosition.x = Mathf.Clamp(movePosition.x, -12f, 12f);
