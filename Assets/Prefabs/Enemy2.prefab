@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7485362495866290011}
   m_Layer: 0
   m_Name: Enemy2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,8 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8de4c15636b7a36469c080a048af5408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minspeed: 0.5
-  maxspeed: 1
+  minspeed: 1
+  maxspeed: 2
   minDistance: 1.2
   damage: 0
   health: 0
+  collectable: {fileID: 3351123514431286043, guid: 73f4bb408dd6b9343a049526566b5aac,
+    type: 3}

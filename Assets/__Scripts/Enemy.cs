@@ -15,36 +15,63 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public float health;
 
+    bool spawnsCollectable = false;
+    public GameObject collectable;
 
     // Start is called before the first frame update
     void Start()
     {
         health = Random.Range(2.4f, 5.3f);
-        damage = Random.Range(5f, 10f);
+        damage = Random.Range(2, 4f);
         sprite = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponent<Animator>();
+
+        if(Random.value < 0.1)
+        {
+            spawnsCollectable = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Enemy will move toward the player target
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, Random.Range(minspeed, maxspeed)*Time.deltaTime);
 
-        if(Vector2.Distance(transform.position, player.transform.position) < minDistance)
+        if(health <= 0)
         {
-            anim.Play("Attack");
+            if(spawnsCollectable)
+            {
+                Instantiate(collectable, transform.position, Quaternion.identity);
+            }
+            Destroy(gameObject);
         }
 
-        if(transform.position.x - player.transform.position.x > 0)
+        if(player != null)
         {
-            sprite.flipX = true;
-        }
+            // Enemy will move toward the player target, until it reaches them
+            if(Vector2.Distance(transform.position, player.transform.position) > minDistance)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, Random.Range(minspeed, maxspeed)*Time.deltaTime);
+            }
+            
+            if(Vector2.Distance(transform.position, player.transform.position) < minDistance)
+            {
+                anim.Play("Attack");
+            }
 
-        if(transform.position.x - player.transform.position.x < 0)
+            if(transform.position.x - player.transform.position.x > 0)
+            {
+                sprite.flipX = true;
+            }
+
+            if(transform.position.x - player.transform.position.x < 0)
+            {
+                sprite.flipX = false;
+            }
+        }
+        else
         {
-            sprite.flipX = false;
+            Time.timeScale = 0;
         }
         
     }
@@ -60,6 +87,6 @@ public class Enemy : MonoBehaviour
 
     public void DamagePlayer()
     {
-        //player.GetComponent<Player>().health -= damage;
+        player.GetComponent<Player>().health -= damage;
     }
 }

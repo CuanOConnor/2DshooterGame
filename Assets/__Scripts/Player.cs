@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     public float health;
     public Slider sl;
 
+    public GameObject diedPanel;
+
     Vector2 movePosition;
 
     Rigidbody2D rb;
@@ -30,6 +32,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+            diedPanel.SetActive(true);
+        }
+
         sl.value = health;
         movePosition = new Vector2(Input.GetAxis("Horizontal")*speed*Time.deltaTime, Input.GetAxis("Vertical")*speed*Time.deltaTime);
         movePosition = (rb.position + movePosition);
@@ -76,4 +84,13 @@ public class Player : MonoBehaviour
         }
         
     }
+
+    /*void OnCollisionEnter2D(Collision2D obj)
+    {
+        if(obj.gameObject.tag == "Health")
+        {
+            health += 10;
+            Destroy(obj.gameObject);
+        }
+    }*/
 }
