@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         rb = GetComponent<Rigidbody2D>();
         sl.maxValue = health;
         sl.value = health;   
@@ -84,13 +85,4 @@ public class Player : MonoBehaviour
         }
         
     }
-
-    /*void OnCollisionEnter2D(Collision2D obj)
-    {
-        if(obj.gameObject.tag == "Health")
-        {
-            health += 10;
-            Destroy(obj.gameObject);
-        }
-    }*/
 }

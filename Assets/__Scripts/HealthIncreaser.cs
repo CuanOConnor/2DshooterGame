@@ -9,7 +9,7 @@ public class HealthIncreaser : MonoBehaviour
         if(obj.gameObject.tag == "Player")
         {
             obj.GetComponent<Player>().health += 10f;
-            Destroy(obj.gameObject);
+            Destroy(gameObject);
         }
     }
 

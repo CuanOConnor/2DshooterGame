@@ -1,26 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class LevelLoader : MonoBehaviour
+public class ScoreScript : MonoBehaviour
 {
-    public GameObject loadingScreen;
-
-    public void LoadLevel(string lvlname)
-    {
-        Application.LoadLevel("Menu");
-    }
+    public static int scoreValue = 0;
+    Text score;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        score = GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        score.text = "Score: " + scoreValue;
     }
 }

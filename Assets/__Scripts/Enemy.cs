@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     SpriteRenderer sprite;
     [HideInInspector]
     public float damage;
-    [HideInInspector]
+
     public float health;
 
     bool spawnsCollectable = false;
@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = Random.Range(2.4f, 5.3f);
+        //health = Random.Range(2.4f, 5.3f);
         damage = Random.Range(2, 4f);
         sprite = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
             {
                 Instantiate(collectable, transform.position, Quaternion.identity);
             }
+            ScoreScript.scoreValue += 10;
             Destroy(gameObject);
         }
 
